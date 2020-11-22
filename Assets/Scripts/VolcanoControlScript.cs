@@ -19,14 +19,18 @@ public class VolcanoControlScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            smokeUpCurrentEmission += Time.deltaTime* smokeUpEmissionSpeed;
-
-            smokeUpCurrentEmission = Mathf.Clamp(smokeUpCurrentEmission, smokeUpMinEmission, smokeUpMaxEmission);
-
-            var emission = smokeUp.emission;
-            emission.rateOverTime = smokeUpCurrentEmission;
-
+            smokeUpCurrentEmission += Time.deltaTime * smokeUpEmissionSpeed;
         }
+        else
+        {
+            smokeUpCurrentEmission -= Time.deltaTime * smokeUpEmissionSpeed;
+        }
+
+        smokeUpCurrentEmission = Mathf.Clamp(smokeUpCurrentEmission, smokeUpMinEmission, smokeUpMaxEmission);
+        var emission = smokeUp.emission;
+        emission.rateOverTime = smokeUpCurrentEmission;
+
+
     }
 
 
