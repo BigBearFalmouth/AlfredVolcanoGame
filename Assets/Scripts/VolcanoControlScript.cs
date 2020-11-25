@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VolcanoControlScript : MonoBehaviour
 {
@@ -15,20 +16,21 @@ public class VolcanoControlScript : MonoBehaviour
     [SerializeField]
     float smokeUpEmissionSpeed = 10.0f;
 
+    [SerializeField]
+    Text debugTxt;
+
     private void Update()
     {
         if (Input.GetButtonDown("Jump"))
         {
             smokeUpCurrentEmission += Time.deltaTime * smokeUpEmissionSpeed;
         }
-        else
-        {
-            smokeUpCurrentEmission -= Time.deltaTime * smokeUpEmissionSpeed;
-        }
 
         smokeUpCurrentEmission = Mathf.Clamp(smokeUpCurrentEmission, smokeUpMinEmission, smokeUpMaxEmission);
         var emission = smokeUp.emission;
         emission.rateOverTime = smokeUpCurrentEmission;
+
+        debugTxt.text = smokeUpCurrentEmission.ToString();
 
 
     }
